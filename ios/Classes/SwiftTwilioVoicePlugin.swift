@@ -108,6 +108,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         if flutterCall.method == "tokens" {
             guard let token = arguments["accessToken"] as? String else {return}
             self.accessToken = token
+            self.sendPhoneCallEvents(description: "somethigns randomg", isError: false)
             if let deviceToken = deviceToken, let token = accessToken {
                 self.sendPhoneCallEvents(description: "LOG|pushRegistry:attempting to register with twilio", isError: false)
                 TwilioVoiceSDK.register(accessToken: token, deviceToken: deviceToken) { (error) in
