@@ -29,6 +29,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         get{UserDefaults.standard.data(forKey: kCachedDeviceToken)}
         set{UserDefaults.standard.setValue(newValue, forKey: kCachedDeviceToken)}
     }
+    var deviceT: Data?
     var callArgs: Dictionary<String, AnyObject> = [String: AnyObject]()
     
     var voipRegistry: PKPushRegistry
@@ -108,6 +109,12 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         if flutterCall.method == "tokens" {
             guard let token = arguments["accessToken"] as? String else {return}
             self.accessToken = token
+            if  UserDefaults.standard.object(forKey: kCachedDeviceToken) == nil {
+               self.deviceToken = self.deviceT
+            }
+            else {
+                self.deviceT = self.deviceToken
+            }
             self.sendPhoneCallEvents(description: "somethigns randomg", isError: false)
             if let deviceToken = deviceToken, let token = accessToken {
                 self.sendPhoneCallEvents(description: "LOG|pushRegistry:attempting to register with twilio", isError: false)
@@ -116,7 +123,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
                         self.sendPhoneCallEvents(description: "LOG|An error occurred while registering: \(error.localizedDescription)", isError: false)
                     }
                     else {
-                        self.sendPhoneCallEvents(description: "LOG|Successfully registered for VoIP push notifications.", isError: false)
+                        self.sendPhoneCallEvents(description: "LOG|Successfully registered for VoIP push notifications for token \(token)", isError: false)
                     }
                 }
             }
