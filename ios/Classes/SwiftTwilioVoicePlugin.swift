@@ -998,7 +998,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
             if let to = userInfo["To"] as? String{
                 self.identity = to
             }
-            makeCall(to: callTo)
+            makeCall(to: callTo, callerName: nil)
             completionHandler()
             self.sendPhoneCallEvents(description: "ReturningCall|\(identity)|\(user)|Outgoing", isError: false)
         }
