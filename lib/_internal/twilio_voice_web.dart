@@ -774,7 +774,7 @@ class Call extends MethodChannelTwilioCall {
   /// </code>
   /// See [twilio_js.Device.connect]
   @override
-  Future<bool?> place({required String from, required String to, Map<String, dynamic>? extraOptions}) async {
+  Future<bool?> place({required String from, required String to, String? callerName, Map<String, dynamic>? extraOptions}) async {
     assert(device != null,
         "Twilio device is null, make sure you have initialized the device first by calling [ setTokens({required String accessToken, String? deviceToken}) ] ");
     assert(from.isNotEmpty, "From cannot be empty");
