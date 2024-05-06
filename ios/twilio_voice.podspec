@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                        DESC
   s.homepage         = 'https://github.com/cybex-dev/twilio_voice/'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Charles Dyason' => 'charles@earthbase.io' }
+  s.author           = { 'Punit Solanki' => 'punit.s@consultadd.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
