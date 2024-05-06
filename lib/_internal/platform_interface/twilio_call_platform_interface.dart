@@ -29,7 +29,7 @@ abstract class TwilioCallPlatform extends SharedPlatformInterface {
   /// Places new call
   ///
   /// [extraOptions] will be added to the callPayload sent to your server
-  Future<bool?> place({required String from, required String to, Map<String, dynamic>? extraOptions});
+  Future<bool?> place({required String from, required String to, String? callerName, Map<String, dynamic>? extraOptions});
 
   /// Hangs up active call
   Future<bool?> hangUp();
