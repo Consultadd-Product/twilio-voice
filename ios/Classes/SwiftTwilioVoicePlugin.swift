@@ -130,6 +130,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         } else if flutterCall.method == "makeCall" {
             guard let callTo = arguments["To"] as? String else {return}
             guard let callFrom = arguments["From"] as? String else {return}
+            let callerName = arguments["callerName"] as? String 
             self.callArgs = arguments
             self.callOutgoing = true
             if let accessToken = arguments["accessToken"] as? String{
@@ -137,7 +138,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
             }
             self.callTo = callTo
             self.identity = callFrom
-            makeCall(to: callTo)
+            makeCall(to: callTo, callerName: callerName)
         }
         else if flutterCall.method == "toggleMute"
         {
@@ -351,7 +352,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         return false;
     }
     
-    func makeCall(to: String)
+    func makeCall(to: String, callerName: String?)
     {
         // Cancel the previous call before making another one.
         if (self.call != nil) {
@@ -369,7 +370,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
                     let continueWithMic: UIAlertAction = UIAlertAction(title: NSLocalizedString("btn_continue_no_mic", comment: ""),
                                                                        style: .default,
                                                                        handler: { (action) in
-                                                                        self.performStartCallAction(uuid: uuid, handle: to)
+                                                                        self.performStartCallAction(uuid: uuid, handle: to, callerName: callerName)
                                                                        })
                     alertController.addAction(continueWithMic)
                     
@@ -395,7 +396,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
                     currentViewController.present(alertController, animated: true, completion: nil)
                     
                 } else {
-                    self.performStartCallAction(uuid: uuid, handle: to)
+                    self.performStartCallAction(uuid: uuid, handle: to, callerName: callerName)
                 }
             }
         }
@@ -847,7 +848,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
     }
     
     // MARK: Call Kit Actions
-    func performStartCallAction(uuid: UUID, handle: String) {
+    func performStartCallAction(uuid: UUID, handle: String, callerName: String?) {
         let callHandle = CXHandle(type: .generic, value: handle)
         let startCallAction = CXStartCallAction(call: uuid, handle: callHandle)
         let transaction = CXTransaction(action: startCallAction)
@@ -862,7 +863,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
             
             let callUpdate = CXCallUpdate()
             callUpdate.remoteHandle = callHandle
-            callUpdate.localizedCallerName = "Someone" ?? self.clients[handle] ?? self.clients["defaultCaller"] ?? self.defaultCaller
+            callUpdate.localizedCallerName = callerName ?? self.clients[handle] ?? self.clients["defaultCaller"] ?? self.defaultCaller
             callUpdate.supportsDTMF = true
             callUpdate.supportsHolding = true
             callUpdate.supportsGrouping = false

@@ -23,12 +23,13 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
   ///
   /// [extraOptions] will be added to the callPayload sent to your server
   @override
-  Future<bool?> place({required String from, required String to, Map<String, dynamic>? extraOptions}) {
+  Future<bool?> place({required String from, required String to, String? callerName, Map<String, dynamic>? extraOptions}) {
     _activeCall = ActiveCall(from: from, to: to, callDirection: CallDirection.outgoing);
 
     var options = extraOptions ?? <String, dynamic>{};
     options['From'] = from;
     options['To'] = to;
+    options['callerName'] = callerName;
     return _channel.invokeMethod('makeCall', options);
   }
 
