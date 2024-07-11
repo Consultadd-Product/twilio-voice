@@ -198,6 +198,10 @@ class TVConnectionService : ConnectionService() {
         fun getConnection(callSid: String): TVCallConnection? {
             return activeConnections[callSid]
         }
+
+        fun getAllConnection(callSid: String): HashMap<String, TVCallConnection>()? {
+            return actionConnections
+        }
     }
 
 
