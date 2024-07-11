@@ -12,6 +12,7 @@ enum class TVMethodChannels(val method: String) {
     IS_MUTED("isMuted"),
     CALL_SID("call-sid"),
     IS_ON_CALL("isOnCall"),
+    GET_ACTIVE_CALL("getActiveCall"),
     HOLD_CALL("holdCall"),
     IS_HOLDING("isHolding"),
     ANSWER("answer"),
