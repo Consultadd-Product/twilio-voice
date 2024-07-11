@@ -506,7 +506,7 @@ class TwilioVoicePlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamH
             }
 
             TVMethodChannels.GET_ACTIVE_CALL -> {
-                val activeCall = TVConnectionService.getActiveCallHandle();
+                val activeCallHandle = TVConnectionService.getActiveCallHandle();
                 result.success(activeCallHandle)
             }
 
