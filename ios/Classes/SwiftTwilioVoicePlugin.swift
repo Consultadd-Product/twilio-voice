@@ -115,7 +115,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
             else {
                 self.deviceT = self.deviceToken
             }
-            self.sendPhoneCallEvents(description: "somethigns randomg", isError: false)
+            
             if let deviceToken = deviceToken, let token = accessToken {
                 self.sendPhoneCallEvents(description: "LOG|pushRegistry:attempting to register with twilio", isError: false)
                 TwilioVoiceSDK.register(accessToken: token, deviceToken: deviceToken) { (error) in
@@ -196,6 +196,9 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         {
             result(self.call == nil ? nil : self.call!.sid);
             return;
+        }
+        else if flutterCall.method == "getActiveCall"{
+            result(self.call == nil ? nil : self.call);
         }
         else if flutterCall.method == "isOnCall"
         {

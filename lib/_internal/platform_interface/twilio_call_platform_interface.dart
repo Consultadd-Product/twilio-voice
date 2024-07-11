@@ -31,6 +31,9 @@ abstract class TwilioCallPlatform extends SharedPlatformInterface {
   /// [extraOptions] will be added to the callPayload sent to your server
   Future<bool?> place({required String from, required String to, String? callerName, Map<String, dynamic>? extraOptions});
 
+  /// get active call
+  Future<dynamic?> getActiveCall();
+
   /// Hangs up active call
   Future<bool?> hangUp();
 
