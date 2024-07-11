@@ -510,7 +510,7 @@ class TwilioVoicePlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamH
                 if(activeCallHandle != null){
                     val activeCall = TVConnectionService.getConnection(activeCallHandle);
                     val params = activeCall?.getCallParameters()
-                    if(params){
+                    if(params != null){
                         val jsonObject = JSONObject()
                         jsonObject.put("from", params?.from)
                         jsonObject.put("to", params?.to)
