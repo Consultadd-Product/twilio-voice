@@ -199,7 +199,7 @@ class TVConnectionService : ConnectionService() {
             return activeConnections[callSid]
         }
 
-        fun getAllConnection(callSid: String): HashMap<String, TVCallConnection>()? {
+        fun getAllConnection(): HashMap<String, TVCallConnection>()? {
             return actionConnections
         }
     }
