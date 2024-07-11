@@ -49,7 +49,7 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
         _activeCall = ActiveCall(
           from: params['from'],
           to: params['to'],
-          callDirection: CallDirection.outgoing,
+          callDirection: CallDirection.incoming,
         );
       }
       return value;

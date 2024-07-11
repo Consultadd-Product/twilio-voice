@@ -514,6 +514,9 @@ class TwilioVoicePlugin : FlutterPlugin, MethodCallHandler, EventChannel.StreamH
                         val jsonObject = JSONObject()
                         jsonObject.put("from", params?.from)
                         jsonObject.put("to", params?.to)
+                        jsonObject.put("rawFrom", params?.fromRaw)
+                        jsonObject.put("rawTo", params?.toRaw)
+                        jsonObject.put("humanReadbleName", paramas?.resolveHumanReadableName)
 
                         result.success(jsonObject.toString())
                     }
