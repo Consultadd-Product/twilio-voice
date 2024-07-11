@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:twilio_voice/twilio_voice.dart';
 
@@ -42,10 +44,12 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
   Future<dynamic?> getActiveCall() async {
     return _channel.invokeMethod<dynamic?>(
         "getActiveCall", <String, dynamic>{}).then((dynamic? value) {
+          var params = json.decode(value);
       _activeCall = ActiveCall(
-          from: value.from,
-          to: value.to,
-          callDirection: CallDirection.outgoing);
+        from: params.from,
+        to: params.to,
+        callDirection: CallDirection.outgoing,
+      );
       return value;
     });
   }
