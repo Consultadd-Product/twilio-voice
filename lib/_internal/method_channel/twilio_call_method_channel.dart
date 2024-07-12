@@ -44,14 +44,14 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
   Future<dynamic?> getActiveCall() async {
     return _channel.invokeMethod<String?>(
         "getActiveCall", <String, dynamic>{}).then((String? value) {
-      // if (value != null) {
-      //   var params = jsonDecode(value);
-      //   _activeCall = ActiveCall(
-      //     from: params['from'],
-      //     to: params['to']?.split(":")[1],
-      //     callDirection: CallDirection.incoming,
-      //   );
-      // }
+      if (value != null) {
+        var params = jsonDecode(value);
+        _activeCall = ActiveCall(
+          from: params['from'],
+          to: params['to']?.split(":")[1],
+          callDirection: CallDirection.incoming,
+        );
+      }
       return value;
     });
   }
