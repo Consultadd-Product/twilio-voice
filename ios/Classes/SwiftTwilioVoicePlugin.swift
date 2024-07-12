@@ -204,9 +204,14 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
                 jsonObject["to"] = self.call!.to
                 jsonObject["rawFrom"] = self.call!.from
                 jsonObject["rawTo"] = self.call!.to
-                let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
-                let json = String(data: jsonData, encoding: String.Encoding.utf8)
-                result(json)
+                do{
+                    let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+                    let json = String(data: jsonData, encoding: String.Encoding.utf8)
+                    result(json)
+                }
+                catch{
+                    result(nil)
+                }
             }
             else {
                 result(nil);
