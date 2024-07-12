@@ -32,7 +32,7 @@ abstract class TwilioCallPlatform extends SharedPlatformInterface {
   Future<bool?> place({required String from, required String to, String? callerName, Map<String, dynamic>? extraOptions});
 
   /// get active call
-  Future<dynamic?> getActiveCall();
+  Future<dynamic> getActiveCall();
 
   /// Hangs up active call
   Future<bool?> hangUp();

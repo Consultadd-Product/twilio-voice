@@ -41,7 +41,7 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
   }
 
   @override
-  Future<dynamic?> getActiveCall() async {
+  Future<dynamic> getActiveCall() async {
     return _channel.invokeMethod<String?>(
         "getActiveCall", <String, dynamic>{}).then((String? value) {
       if (value != null) {
