@@ -48,7 +48,7 @@ class MethodChannelTwilioCall extends TwilioCallPlatform {
         var params = jsonDecode(value);
         _activeCall = ActiveCall(
           from: params['from'],
-          to: params['to'],
+          to: params['to']?.split(":")[1],
           callDirection: CallDirection.incoming,
         );
       }

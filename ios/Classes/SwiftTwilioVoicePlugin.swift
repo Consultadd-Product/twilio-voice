@@ -198,7 +198,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
             return;
         }
         else if flutterCall.method == "getActiveCall"{
-            result(self.call == nil ? nil : self.call);
+            result(self.call == nil ? nil : String(describing: self.call));
         }
         else if flutterCall.method == "isOnCall"
         {
