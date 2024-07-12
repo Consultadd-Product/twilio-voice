@@ -199,8 +199,12 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         }
         else if flutterCall.method == "getActiveCall"{
             if self.call != nil {
-                let jsonEncoder = JSONEncoder()
-                let jsonData = try jsonEncoder.encode(self.call)
+                var jsonObject: [String: Any] = [:]
+                jsonObject["from"] = self.call!.from
+                jsonObject["to"] = self.call!.to
+                jsonObject["rawFrom"] = self.call!.from
+                jsonObject["rawTo"] = self.call!.to
+                let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
                 let json = String(data: jsonData, encoding: String.Encoding.utf8)
                 result(json)
             }
