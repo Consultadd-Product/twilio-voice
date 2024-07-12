@@ -200,7 +200,7 @@ public class SwiftTwilioVoicePlugin: NSObject, FlutterPlugin,  FlutterStreamHand
         else if flutterCall.method == "getActiveCall"{
             if self.call != nil {
                 let jsonEncoder = JSONEncoder()
-                let jsonData = try json.Encoder.encode(self.call)
+                let jsonData = try jsonEncoder.encode(self.call)
                 let json = String(data: jsonData, encoding: String.Encoding.utf8)
                 result(json)
             }
