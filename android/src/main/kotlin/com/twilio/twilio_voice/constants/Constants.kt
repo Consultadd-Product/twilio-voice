@@ -2,7 +2,7 @@ package com.twilio.twilio_voice.constants
 
 object Constants {
 
-    const val DEFAULT_UNKNOWN_CALLER: String = "Unknown Caller"
+    const val DEFAULT_UNKNOWN_CALLER: String = "Softphone"
     const val PARAM_FROM: String = "From"
     const val PARAM_TO: String = "To"
     const val PARAM_CALL_SID: String = "CallSid"
